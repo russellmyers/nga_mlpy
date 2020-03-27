@@ -1,0 +1,1548 @@
+{
+    "data": {
+        "selection": [
+            {
+                "title": "MLService",
+                "value": "TWV"
+            },
+            {
+                "title": "Model",
+                "value": "SS01"
+            },
+            {
+                "title": "Version",
+                "value": 11
+            },
+            {
+                "title": "GCC",
+                "value": "SOL"
+            },
+            {
+                "title": "LCC",
+                "value": "SUS"
+            },
+            {
+                "title": "Period",
+                "value": 201915
+            },
+            {
+                "title": "PayrollService",
+                "value": "EUH"
+            },
+            {
+                "title": "System",
+                "value": "PP9"
+            },
+            {
+                "title": "Client",
+                "value": 100
+            },
+            {
+                "title": "ABKRS",
+                "value": "U3"
+            }
+        ],
+        "values": [
+            [
+                {
+                    "title": "MLService",
+                    "value": "TWV"
+                },
+                {
+                    "title": "Model",
+                    "value": "SS01"
+                },
+                {
+                    "title": "Version",
+                    "value": 11
+                },
+                {
+                    "title": "GCC",
+                    "value": "SOL"
+                },
+                {
+                    "title": "LCC",
+                    "value": "SUS"
+                },
+                {
+                    "title": "Variant",
+                    "value": "BIWK"
+                },
+                {
+                    "title": "Period",
+                    "value": 201915
+                },
+                {
+                    "title": "PayrollService",
+                    "value": "EUH"
+                },
+                {
+                    "title": "Client",
+                    "value": 100
+                },
+                {
+                    "title": "ABKRS",
+                    "value": "U3"
+                },
+                {
+                    "title": "PERNR",
+                    "value": 58
+                },
+                {
+                    "title": "System",
+                    "value": "PP9"
+                },
+                {
+                    "title": "PersArea",
+                    "value": "1036"
+                },
+                {
+                    "title": "EmpGroup",
+                    "value": "V"
+                },
+                {
+                    "title": "EmpSubgroup",
+                    "value": "N0"
+                },
+                {
+                    "title": "ForPeriod",
+                    "value": 201915
+                },
+                {
+                    "title": "GenlTaxableAmount",
+                    "value": 8242.99
+                },
+                {
+                    "title": "BenEEContrib",
+                    "value": -950.16
+                },
+                {
+                    "title": "401KWages",
+                    "value": 8227.79
+                },
+                {
+                    "title": "BaseForBSI",
+                    "value": 8227.79
+                },
+                {
+                    "title": "TGEESocSecTax",
+                    "value": 8242.99
+                },
+                {
+                    "title": "TaxBaseWage",
+                    "value": 8227.79
+                },
+                {
+                    "title": "TaxGrossWage",
+                    "value": 5014.97
+                },
+                {
+                    "title": "TBWithholdingTax",
+                    "value": 7322.73
+                },
+                {
+                    "title": "REWithholdingTax",
+                    "value": 7322.73
+                },
+                {
+                    "title": "EEGTLITaxable",
+                    "value": 15.2
+                },
+                {
+                    "title": "TNTDWithholdingTax",
+                    "value": 15.2
+                },
+                {
+                    "title": "AnnSal",
+                    "value": 197467.0
+                },
+                {
+                    "title": "BonusAccrual",
+                    "value": 3291.12
+                },
+                {
+                    "title": "ActBaseSal",
+                    "value": 0.0
+                },
+                {
+                    "title": "9GLG",
+                    "value": 740.5
+                },
+                {
+                    "title": "Year",
+                    "value": 2019
+                },
+                {
+                    "title": "TaxStatus",
+                    "value": 1
+                },
+                {
+                    "title": "ExtraTaxAmt",
+                    "value": 0.0
+                },
+                {
+                    "title": "NumExemptions",
+                    "value": 0
+                },
+                {
+                    "title": "ExemptInd",
+                    "value": NaN
+                },
+                {
+                    "title": "FedTaxWithholding",
+                    "value": 1514.13
+                }
+            ],
+            [
+                {
+                    "title": "MLService",
+                    "value": "TWV"
+                },
+                {
+                    "title": "Model",
+                    "value": "SS01"
+                },
+                {
+                    "title": "Version",
+                    "value": 11
+                },
+                {
+                    "title": "GCC",
+                    "value": "SOL"
+                },
+                {
+                    "title": "LCC",
+                    "value": "SUS"
+                },
+                {
+                    "title": "Variant",
+                    "value": "BIWK"
+                },
+                {
+                    "title": "Period",
+                    "value": 201915
+                },
+                {
+                    "title": "PayrollService",
+                    "value": "EUH"
+                },
+                {
+                    "title": "Client",
+                    "value": 100
+                },
+                {
+                    "title": "ABKRS",
+                    "value": "U3"
+                },
+                {
+                    "title": "PERNR",
+                    "value": 59
+                },
+                {
+                    "title": "System",
+                    "value": "PP9"
+                },
+                {
+                    "title": "PersArea",
+                    "value": "1036"
+                },
+                {
+                    "title": "EmpGroup",
+                    "value": "1"
+                },
+                {
+                    "title": "EmpSubgroup",
+                    "value": "N0"
+                },
+                {
+                    "title": "ForPeriod",
+                    "value": 201915
+                },
+                {
+                    "title": "GenlTaxableAmount",
+                    "value": 7795.67
+                },
+                {
+                    "title": "BenEEContrib",
+                    "value": -906.06
+                },
+                {
+                    "title": "401KWages",
+                    "value": 7780.96
+                },
+                {
+                    "title": "BaseForBSI",
+                    "value": 7780.96
+                },
+                {
+                    "title": "TGEESocSecTax",
+                    "value": 7795.67
+                },
+                {
+                    "title": "TaxBaseWage",
+                    "value": 7780.96
+                },
+                {
+                    "title": "TaxGrossWage",
+                    "value": 7780.96
+                },
+                {
+                    "title": "TBWithholdingTax",
+                    "value": 6881.17
+                },
+                {
+                    "title": "REWithholdingTax",
+                    "value": 6881.17
+                },
+                {
+                    "title": "EEGTLITaxable",
+                    "value": 14.71
+                },
+                {
+                    "title": "TNTDWithholdingTax",
+                    "value": 14.71
+                },
+                {
+                    "title": "AnnSal",
+                    "value": 186743.0
+                },
+                {
+                    "title": "BonusAccrual",
+                    "value": 3112.38
+                },
+                {
+                    "title": "ActBaseSal",
+                    "value": 7780.96
+                },
+                {
+                    "title": "9GLG",
+                    "value": 700.29
+                },
+                {
+                    "title": "Year",
+                    "value": 2019
+                },
+                {
+                    "title": "TaxStatus",
+                    "value": 2
+                },
+                {
+                    "title": "ExtraTaxAmt",
+                    "value": 0.0
+                },
+                {
+                    "title": "NumExemptions",
+                    "value": 4
+                },
+                {
+                    "title": "ExemptInd",
+                    "value": NaN
+                },
+                {
+                    "title": "FedTaxWithholding",
+                    "value": 906.57
+                }
+            ],
+            [
+                {
+                    "title": "MLService",
+                    "value": "TWV"
+                },
+                {
+                    "title": "Model",
+                    "value": "SS01"
+                },
+                {
+                    "title": "Version",
+                    "value": 11
+                },
+                {
+                    "title": "GCC",
+                    "value": "SOL"
+                },
+                {
+                    "title": "LCC",
+                    "value": "SUS"
+                },
+                {
+                    "title": "Variant",
+                    "value": "BIWK"
+                },
+                {
+                    "title": "Period",
+                    "value": 201915
+                },
+                {
+                    "title": "PayrollService",
+                    "value": "EUH"
+                },
+                {
+                    "title": "Client",
+                    "value": 100
+                },
+                {
+                    "title": "ABKRS",
+                    "value": "U3"
+                },
+                {
+                    "title": "PERNR",
+                    "value": 60
+                },
+                {
+                    "title": "System",
+                    "value": "PP9"
+                },
+                {
+                    "title": "PersArea",
+                    "value": "2616"
+                },
+                {
+                    "title": "EmpGroup",
+                    "value": "1"
+                },
+                {
+                    "title": "EmpSubgroup",
+                    "value": "M0"
+                },
+                {
+                    "title": "ForPeriod",
+                    "value": 201915
+                },
+                {
+                    "title": "GenlTaxableAmount",
+                    "value": 6047.14
+                },
+                {
+                    "title": "BenEEContrib",
+                    "value": -929.4
+                },
+                {
+                    "title": "401KWages",
+                    "value": 5946.46
+                },
+                {
+                    "title": "BaseForBSI",
+                    "value": 5971.46
+                },
+                {
+                    "title": "TGEESocSecTax",
+                    "value": 6047.14
+                },
+                {
+                    "title": "TaxBaseWage",
+                    "value": 5971.46
+                },
+                {
+                    "title": "TaxGrossWage",
+                    "value": 5971.46
+                },
+                {
+                    "title": "TBWithholdingTax",
+                    "value": 4826.81
+                },
+                {
+                    "title": "REWithholdingTax",
+                    "value": 4826.81
+                },
+                {
+                    "title": "EEGTLITaxable",
+                    "value": 75.68
+                },
+                {
+                    "title": "TNTDWithholdingTax",
+                    "value": 75.68
+                },
+                {
+                    "title": "AnnSal",
+                    "value": 142715.0
+                },
+                {
+                    "title": "BonusAccrual",
+                    "value": 1189.29
+                },
+                {
+                    "title": "ActBaseSal",
+                    "value": 5946.46
+                },
+                {
+                    "title": "9GLG",
+                    "value": 609.51
+                },
+                {
+                    "title": "Year",
+                    "value": 2019
+                },
+                {
+                    "title": "TaxStatus",
+                    "value": 2
+                },
+                {
+                    "title": "ExtraTaxAmt",
+                    "value": 0.0
+                },
+                {
+                    "title": "NumExemptions",
+                    "value": 9
+                },
+                {
+                    "title": "ExemptInd",
+                    "value": NaN
+                },
+                {
+                    "title": "FedTaxWithholding",
+                    "value": 315.05
+                }
+            ],
+            [
+                {
+                    "title": "MLService",
+                    "value": "TWV"
+                },
+                {
+                    "title": "Model",
+                    "value": "SS01"
+                },
+                {
+                    "title": "Version",
+                    "value": 11
+                },
+                {
+                    "title": "GCC",
+                    "value": "SOL"
+                },
+                {
+                    "title": "LCC",
+                    "value": "SUS"
+                },
+                {
+                    "title": "Variant",
+                    "value": "BIWK"
+                },
+                {
+                    "title": "Period",
+                    "value": 201915
+                },
+                {
+                    "title": "PayrollService",
+                    "value": "EUH"
+                },
+                {
+                    "title": "Client",
+                    "value": 100
+                },
+                {
+                    "title": "ABKRS",
+                    "value": "U3"
+                },
+                {
+                    "title": "PERNR",
+                    "value": 61
+                },
+                {
+                    "title": "System",
+                    "value": "PP9"
+                },
+                {
+                    "title": "PersArea",
+                    "value": "2617"
+                },
+                {
+                    "title": "EmpGroup",
+                    "value": "1"
+                },
+                {
+                    "title": "EmpSubgroup",
+                    "value": "M0"
+                },
+                {
+                    "title": "ForPeriod",
+                    "value": 201915
+                },
+                {
+                    "title": "GenlTaxableAmount",
+                    "value": 5455.22
+                },
+                {
+                    "title": "BenEEContrib",
+                    "value": -1423.28
+                },
+                {
+                    "title": "401KWages",
+                    "value": 5289.96
+                },
+                {
+                    "title": "BaseForBSI",
+                    "value": 5289.96
+                },
+                {
+                    "title": "TGEESocSecTax",
+                    "value": 5455.22
+                },
+                {
+                    "title": "TaxBaseWage",
+                    "value": 5289.96
+                },
+                {
+                    "title": "TaxGrossWage",
+                    "value": 5389.55
+                },
+                {
+                    "title": "TBWithholdingTax",
+                    "value": 4271.31
+                },
+                {
+                    "title": "REWithholdingTax",
+                    "value": 4271.31
+                },
+                {
+                    "title": "EEGTLITaxable",
+                    "value": 65.67
+                },
+                {
+                    "title": "TNTDWithholdingTax",
+                    "value": 65.67
+                },
+                {
+                    "title": "AnnSal",
+                    "value": 126959.0
+                },
+                {
+                    "title": "BonusAccrual",
+                    "value": 1057.99
+                },
+                {
+                    "title": "ActBaseSal",
+                    "value": 5289.96
+                },
+                {
+                    "title": "9GLG",
+                    "value": 542.22
+                },
+                {
+                    "title": "Year",
+                    "value": 2019
+                },
+                {
+                    "title": "TaxStatus",
+                    "value": 1
+                },
+                {
+                    "title": "ExtraTaxAmt",
+                    "value": 0.0
+                },
+                {
+                    "title": "NumExemptions",
+                    "value": 1
+                },
+                {
+                    "title": "ExemptInd",
+                    "value": NaN
+                },
+                {
+                    "title": "FedTaxWithholding",
+                    "value": 702.39
+                }
+            ],
+            [
+                {
+                    "title": "MLService",
+                    "value": "TWV"
+                },
+                {
+                    "title": "Model",
+                    "value": "SS01"
+                },
+                {
+                    "title": "Version",
+                    "value": 11
+                },
+                {
+                    "title": "GCC",
+                    "value": "SOL"
+                },
+                {
+                    "title": "LCC",
+                    "value": "SUS"
+                },
+                {
+                    "title": "Variant",
+                    "value": "BIWK"
+                },
+                {
+                    "title": "Period",
+                    "value": 201915
+                },
+                {
+                    "title": "PayrollService",
+                    "value": "EUH"
+                },
+                {
+                    "title": "Client",
+                    "value": 100
+                },
+                {
+                    "title": "ABKRS",
+                    "value": "U3"
+                },
+                {
+                    "title": "PERNR",
+                    "value": 63
+                },
+                {
+                    "title": "System",
+                    "value": "PP9"
+                },
+                {
+                    "title": "PersArea",
+                    "value": "2616"
+                },
+                {
+                    "title": "EmpGroup",
+                    "value": "1"
+                },
+                {
+                    "title": "EmpSubgroup",
+                    "value": "N0"
+                },
+                {
+                    "title": "ForPeriod",
+                    "value": 201915
+                },
+                {
+                    "title": "GenlTaxableAmount",
+                    "value": 6113.77
+                },
+                {
+                    "title": "BenEEContrib",
+                    "value": -966.36
+                },
+                {
+                    "title": "401KWages",
+                    "value": 5975.75
+                },
+                {
+                    "title": "BaseForBSI",
+                    "value": 5975.75
+                },
+                {
+                    "title": "TGEESocSecTax",
+                    "value": 6113.77
+                },
+                {
+                    "title": "TaxBaseWage",
+                    "value": 5975.75
+                },
+                {
+                    "title": "TaxGrossWage",
+                    "value": 6087.43
+                },
+                {
+                    "title": "TBWithholdingTax",
+                    "value": 5778.4
+                },
+                {
+                    "title": "REWithholdingTax",
+                    "value": 5778.4
+                },
+                {
+                    "title": "EEGTLITaxable",
+                    "value": 26.34
+                },
+                {
+                    "title": "TNTDWithholdingTax",
+                    "value": 26.34
+                },
+                {
+                    "title": "AnnSal",
+                    "value": 143418.0
+                },
+                {
+                    "title": "BonusAccrual",
+                    "value": 1792.73
+                },
+                {
+                    "title": "ActBaseSal",
+                    "value": 5975.75
+                },
+                {
+                    "title": "9GLG",
+                    "value": 612.52
+                },
+                {
+                    "title": "Year",
+                    "value": 2019
+                },
+                {
+                    "title": "TaxStatus",
+                    "value": 1
+                },
+                {
+                    "title": "ExtraTaxAmt",
+                    "value": 0.0
+                },
+                {
+                    "title": "NumExemptions",
+                    "value": 4
+                },
+                {
+                    "title": "ExemptInd",
+                    "value": NaN
+                },
+                {
+                    "title": "FedTaxWithholding",
+                    "value": 938.09
+                }
+            ],
+            [
+                {
+                    "title": "MLService",
+                    "value": "TWV"
+                },
+                {
+                    "title": "Model",
+                    "value": "SS01"
+                },
+                {
+                    "title": "Version",
+                    "value": 11
+                },
+                {
+                    "title": "GCC",
+                    "value": "SOL"
+                },
+                {
+                    "title": "LCC",
+                    "value": "SUS"
+                },
+                {
+                    "title": "Variant",
+                    "value": "BIWK"
+                },
+                {
+                    "title": "Period",
+                    "value": 201915
+                },
+                {
+                    "title": "PayrollService",
+                    "value": "EUH"
+                },
+                {
+                    "title": "Client",
+                    "value": 100
+                },
+                {
+                    "title": "ABKRS",
+                    "value": "U3"
+                },
+                {
+                    "title": "PERNR",
+                    "value": 66
+                },
+                {
+                    "title": "System",
+                    "value": "PP9"
+                },
+                {
+                    "title": "PersArea",
+                    "value": "2924"
+                },
+                {
+                    "title": "EmpGroup",
+                    "value": "1"
+                },
+                {
+                    "title": "EmpSubgroup",
+                    "value": "N0"
+                },
+                {
+                    "title": "ForPeriod",
+                    "value": 201915
+                },
+                {
+                    "title": "GenlTaxableAmount",
+                    "value": 7169.53
+                },
+                {
+                    "title": "BenEEContrib",
+                    "value": -988.39
+                },
+                {
+                    "title": "401KWages",
+                    "value": 7065.62
+                },
+                {
+                    "title": "BaseForBSI",
+                    "value": 7065.62
+                },
+                {
+                    "title": "TGEESocSecTax",
+                    "value": 7169.53
+                },
+                {
+                    "title": "TaxBaseWage",
+                    "value": 7065.62
+                },
+                {
+                    "title": "TaxGrossWage",
+                    "value": 7112.12
+                },
+                {
+                    "title": "TBWithholdingTax",
+                    "value": 6123.73
+                },
+                {
+                    "title": "REWithholdingTax",
+                    "value": 6123.73
+                },
+                {
+                    "title": "EEGTLITaxable",
+                    "value": 57.41
+                },
+                {
+                    "title": "TNTDWithholdingTax",
+                    "value": 57.41
+                },
+                {
+                    "title": "AnnSal",
+                    "value": 169575.0
+                },
+                {
+                    "title": "BonusAccrual",
+                    "value": 2826.25
+                },
+                {
+                    "title": "ActBaseSal",
+                    "value": 7065.62
+                },
+                {
+                    "title": "9GLG",
+                    "value": 724.23
+                },
+                {
+                    "title": "Year",
+                    "value": 2019
+                },
+                {
+                    "title": "TaxStatus",
+                    "value": 2
+                },
+                {
+                    "title": "ExtraTaxAmt",
+                    "value": 0.0
+                },
+                {
+                    "title": "NumExemptions",
+                    "value": 0
+                },
+                {
+                    "title": "ExemptInd",
+                    "value": NaN
+                },
+                {
+                    "title": "FedTaxWithholding",
+                    "value": 893.93
+                }
+            ],
+            [
+                {
+                    "title": "MLService",
+                    "value": "TWV"
+                },
+                {
+                    "title": "Model",
+                    "value": "SS01"
+                },
+                {
+                    "title": "Version",
+                    "value": 11
+                },
+                {
+                    "title": "GCC",
+                    "value": "SOL"
+                },
+                {
+                    "title": "LCC",
+                    "value": "SUS"
+                },
+                {
+                    "title": "Variant",
+                    "value": "BIWK"
+                },
+                {
+                    "title": "Period",
+                    "value": 201915
+                },
+                {
+                    "title": "PayrollService",
+                    "value": "EUH"
+                },
+                {
+                    "title": "Client",
+                    "value": 100
+                },
+                {
+                    "title": "ABKRS",
+                    "value": "U3"
+                },
+                {
+                    "title": "PERNR",
+                    "value": 67
+                },
+                {
+                    "title": "System",
+                    "value": "PP9"
+                },
+                {
+                    "title": "PersArea",
+                    "value": "2616"
+                },
+                {
+                    "title": "EmpGroup",
+                    "value": "1"
+                },
+                {
+                    "title": "EmpSubgroup",
+                    "value": "M0"
+                },
+                {
+                    "title": "ForPeriod",
+                    "value": 201915
+                },
+                {
+                    "title": "GenlTaxableAmount",
+                    "value": 4177.91
+                },
+                {
+                    "title": "BenEEContrib",
+                    "value": -748.06
+                },
+                {
+                    "title": "401KWages",
+                    "value": 4067.71
+                },
+                {
+                    "title": "BaseForBSI",
+                    "value": 4092.71
+                },
+                {
+                    "title": "TGEESocSecTax",
+                    "value": 4177.91
+                },
+                {
+                    "title": "TaxBaseWage",
+                    "value": 4092.71
+                },
+                {
+                    "title": "TaxGrossWage",
+                    "value": 4165.75
+                },
+                {
+                    "title": "TBWithholdingTax",
+                    "value": 3498.64
+                },
+                {
+                    "title": "REWithholdingTax",
+                    "value": 3498.64
+                },
+                {
+                    "title": "EEGTLITaxable",
+                    "value": 12.16
+                },
+                {
+                    "title": "TNTDWithholdingTax",
+                    "value": 12.16
+                },
+                {
+                    "title": "AnnSal",
+                    "value": 97625.0
+                },
+                {
+                    "title": "BonusAccrual",
+                    "value": 650.83
+                },
+                {
+                    "title": "ActBaseSal",
+                    "value": 4067.71
+                },
+                {
+                    "title": "9GLG",
+                    "value": 416.94
+                },
+                {
+                    "title": "Year",
+                    "value": 2019
+                },
+                {
+                    "title": "TaxStatus",
+                    "value": 1
+                },
+                {
+                    "title": "ExtraTaxAmt",
+                    "value": 0.0
+                },
+                {
+                    "title": "NumExemptions",
+                    "value": 0
+                },
+                {
+                    "title": "ExemptInd",
+                    "value": NaN
+                },
+                {
+                    "title": "FedTaxWithholding",
+                    "value": 562.3
+                }
+            ],
+            [
+                {
+                    "title": "MLService",
+                    "value": "TWV"
+                },
+                {
+                    "title": "Model",
+                    "value": "SS01"
+                },
+                {
+                    "title": "Version",
+                    "value": 11
+                },
+                {
+                    "title": "GCC",
+                    "value": "SOL"
+                },
+                {
+                    "title": "LCC",
+                    "value": "SUS"
+                },
+                {
+                    "title": "Variant",
+                    "value": "BIWK"
+                },
+                {
+                    "title": "Period",
+                    "value": 201915
+                },
+                {
+                    "title": "PayrollService",
+                    "value": "EUH"
+                },
+                {
+                    "title": "Client",
+                    "value": 100
+                },
+                {
+                    "title": "ABKRS",
+                    "value": "U3"
+                },
+                {
+                    "title": "PERNR",
+                    "value": 70
+                },
+                {
+                    "title": "System",
+                    "value": "PP9"
+                },
+                {
+                    "title": "PersArea",
+                    "value": "2616"
+                },
+                {
+                    "title": "EmpGroup",
+                    "value": "1"
+                },
+                {
+                    "title": "EmpSubgroup",
+                    "value": "O0"
+                },
+                {
+                    "title": "ForPeriod",
+                    "value": 201915
+                },
+                {
+                    "title": "GenlTaxableAmount",
+                    "value": 10874.08
+                },
+                {
+                    "title": "BenEEContrib",
+                    "value": -1054.07
+                },
+                {
+                    "title": "401KWages",
+                    "value": 9254.87
+                },
+                {
+                    "title": "BaseForBSI",
+                    "value": 9468.75
+                },
+                {
+                    "title": "TGEESocSecTax",
+                    "value": 10874.08
+                },
+                {
+                    "title": "TaxBaseWage",
+                    "value": 9468.75
+                },
+                {
+                    "title": "TaxGrossWage",
+                    "value": 9468.75
+                },
+                {
+                    "title": "TBWithholdingTax",
+                    "value": 8766.25
+                },
+                {
+                    "title": "REWithholdingTax",
+                    "value": 8766.25
+                },
+                {
+                    "title": "EEGTLITaxable",
+                    "value": 44.97
+                },
+                {
+                    "title": "TNTDWithholdingTax",
+                    "value": 44.97
+                },
+                {
+                    "title": "AnnSal",
+                    "value": 226650.0
+                },
+                {
+                    "title": "BonusAccrual",
+                    "value": 5666.25
+                },
+                {
+                    "title": "ActBaseSal",
+                    "value": 9443.75
+                },
+                {
+                    "title": "9GLG",
+                    "value": 115.69
+                },
+                {
+                    "title": "Year",
+                    "value": 2019
+                },
+                {
+                    "title": "TaxStatus",
+                    "value": 2
+                },
+                {
+                    "title": "ExtraTaxAmt",
+                    "value": 0.0
+                },
+                {
+                    "title": "NumExemptions",
+                    "value": 5
+                },
+                {
+                    "title": "ExemptInd",
+                    "value": NaN
+                },
+                {
+                    "title": "FedTaxWithholding",
+                    "value": 1290.44
+                }
+            ],
+            [
+                {
+                    "title": "MLService",
+                    "value": "TWV"
+                },
+                {
+                    "title": "Model",
+                    "value": "SS01"
+                },
+                {
+                    "title": "Version",
+                    "value": 11
+                },
+                {
+                    "title": "GCC",
+                    "value": "SOL"
+                },
+                {
+                    "title": "LCC",
+                    "value": "SUS"
+                },
+                {
+                    "title": "Variant",
+                    "value": "BIWK"
+                },
+                {
+                    "title": "Period",
+                    "value": 201915
+                },
+                {
+                    "title": "PayrollService",
+                    "value": "EUH"
+                },
+                {
+                    "title": "Client",
+                    "value": 100
+                },
+                {
+                    "title": "ABKRS",
+                    "value": "U3"
+                },
+                {
+                    "title": "PERNR",
+                    "value": 71
+                },
+                {
+                    "title": "System",
+                    "value": "PP9"
+                },
+                {
+                    "title": "PersArea",
+                    "value": "2616"
+                },
+                {
+                    "title": "EmpGroup",
+                    "value": "1"
+                },
+                {
+                    "title": "EmpSubgroup",
+                    "value": "N0"
+                },
+                {
+                    "title": "ForPeriod",
+                    "value": 201915
+                },
+                {
+                    "title": "GenlTaxableAmount",
+                    "value": 6413.93
+                },
+                {
+                    "title": "BenEEContrib",
+                    "value": -738.8
+                },
+                {
+                    "title": "401KWages",
+                    "value": 6307.75
+                },
+                {
+                    "title": "BaseForBSI",
+                    "value": 6332.75
+                },
+                {
+                    "title": "TGEESocSecTax",
+                    "value": 6413.93
+                },
+                {
+                    "title": "TaxBaseWage",
+                    "value": 6332.75
+                },
+                {
+                    "title": "TaxGrossWage",
+                    "value": 6332.75
+                },
+                {
+                    "title": "TBWithholdingTax",
+                    "value": 5308.5
+                },
+                {
+                    "title": "REWithholdingTax",
+                    "value": 5308.5
+                },
+                {
+                    "title": "EEGTLITaxable",
+                    "value": 81.18
+                },
+                {
+                    "title": "TNTDWithholdingTax",
+                    "value": 81.18
+                },
+                {
+                    "title": "AnnSal",
+                    "value": 151386.0
+                },
+                {
+                    "title": "BonusAccrual",
+                    "value": 1892.33
+                },
+                {
+                    "title": "ActBaseSal",
+                    "value": 6307.75
+                },
+                {
+                    "title": "9GLG",
+                    "value": 646.55
+                },
+                {
+                    "title": "Year",
+                    "value": 2019
+                },
+                {
+                    "title": "TaxStatus",
+                    "value": 1
+                },
+                {
+                    "title": "ExtraTaxAmt",
+                    "value": 0.0
+                },
+                {
+                    "title": "NumExemptions",
+                    "value": 0
+                },
+                {
+                    "title": "ExemptInd",
+                    "value": NaN
+                },
+                {
+                    "title": "FedTaxWithholding",
+                    "value": 993.31
+                }
+            ],
+            [
+                {
+                    "title": "MLService",
+                    "value": "TWV"
+                },
+                {
+                    "title": "Model",
+                    "value": "SS01"
+                },
+                {
+                    "title": "Version",
+                    "value": 11
+                },
+                {
+                    "title": "GCC",
+                    "value": "SOL"
+                },
+                {
+                    "title": "LCC",
+                    "value": "SUS"
+                },
+                {
+                    "title": "Variant",
+                    "value": "BIWK"
+                },
+                {
+                    "title": "Period",
+                    "value": 201915
+                },
+                {
+                    "title": "PayrollService",
+                    "value": "EUH"
+                },
+                {
+                    "title": "Client",
+                    "value": 100
+                },
+                {
+                    "title": "ABKRS",
+                    "value": "U3"
+                },
+                {
+                    "title": "PERNR",
+                    "value": 73
+                },
+                {
+                    "title": "System",
+                    "value": "PP9"
+                },
+                {
+                    "title": "PersArea",
+                    "value": "2617"
+                },
+                {
+                    "title": "EmpGroup",
+                    "value": "1"
+                },
+                {
+                    "title": "EmpSubgroup",
+                    "value": "N0"
+                },
+                {
+                    "title": "ForPeriod",
+                    "value": 201915
+                },
+                {
+                    "title": "GenlTaxableAmount",
+                    "value": 6037.73
+                },
+                {
+                    "title": "BenEEContrib",
+                    "value": -1250.02
+                },
+                {
+                    "title": "401KWages",
+                    "value": 5961.83
+                },
+                {
+                    "title": "BaseForBSI",
+                    "value": 5961.83
+                },
+                {
+                    "title": "TGEESocSecTax",
+                    "value": 6037.73
+                },
+                {
+                    "title": "TaxBaseWage",
+                    "value": 5961.83
+                },
+                {
+                    "title": "TaxGrossWage",
+                    "value": 5961.83
+                },
+                {
+                    "title": "TBWithholdingTax",
+                    "value": 5698.48
+                },
+                {
+                    "title": "REWithholdingTax",
+                    "value": 5698.48
+                },
+                {
+                    "title": "EEGTLITaxable",
+                    "value": 75.9
+                },
+                {
+                    "title": "TNTDWithholdingTax",
+                    "value": 75.9
+                },
+                {
+                    "title": "AnnSal",
+                    "value": 143084.0
+                },
+                {
+                    "title": "BonusAccrual",
+                    "value": 1788.55
+                },
+                {
+                    "title": "ActBaseSal",
+                    "value": 5961.83
+                },
+                {
+                    "title": "9GLG",
+                    "value": 611.08
+                },
+                {
+                    "title": "Year",
+                    "value": 2019
+                },
+                {
+                    "title": "TaxStatus",
+                    "value": 2
+                },
+                {
+                    "title": "ExtraTaxAmt",
+                    "value": 0.0
+                },
+                {
+                    "title": "NumExemptions",
+                    "value": 0
+                },
+                {
+                    "title": "ExemptInd",
+                    "value": NaN
+                },
+                {
+                    "title": "FedTaxWithholding",
+                    "value": 800.37
+                }
+            ]
+        ]
+    }
+}
