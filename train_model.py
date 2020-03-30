@@ -35,7 +35,7 @@ def get_args():
 
     return args
 
-print('Training commencing....')
+print('Training commencing.....')
 
 args = get_args()
 

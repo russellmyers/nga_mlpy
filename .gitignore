@@ -1,5 +1,8 @@
 data/
 outputs/
+azure_upload_scripts/
+myenv.yml
+downloaded_models/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
