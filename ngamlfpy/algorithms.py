@@ -318,9 +318,11 @@ class EnhancedIsolationForest:
      max depth defaults to log2 of number of examples
      """
 
-    def __init__(self, verbose=0,random_state=42):
+    def __init__(self, num_trees=200, max_samples = 'auto' , verbose = 0, random_state=42):
         self.trees = []
         self.verbose = verbose
+        self.num_trees = num_trees
+        self.max_samples = max_samples
 
         self.use_samples = None # set in fit() method
 
@@ -329,7 +331,7 @@ class EnhancedIsolationForest:
         self.forest_depths = None
         self.all_features_used = None
 
-    def fit(self, df_f, num_trees=200, max_samples='auto', verbose=0):
+    def fit(self, df_f, verbose=0):
         auto_samples = 256
 
         self.cat_columns = list(df_f.select_dtypes(include='object').columns)
@@ -337,19 +339,19 @@ class EnhancedIsolationForest:
         self.cat_column_nums = [df_f.columns.get_loc(c) for c in self.cat_columns]
         print('Categorical column nums: ', self.cat_column_nums)
 
-        self.trees = [None for i in range(num_trees)]
+        self.trees = [None for i in range(self.num_trees)]
 
-        if max_samples == 'auto':
+        if self.max_samples == 'auto':
             if df_f.shape[0] > auto_samples:
                 self.use_samples = auto_samples
             else:
                 self.use_samples = df_f.shape[0]
         else:
-            self.use_samples = max_samples
+            self.use_samples = self.max_samples
 
-        for i in range(num_trees):
+        for i in range(self.num_trees):
             if (i % 10 == 0):
-                print('training tree: ', i, '/', num_trees)
+                print('training tree: ', i, '/', self.num_trees)
             self.trees[i] = EnhancedIsolationTree()
             # print('before: ',len(self.trees[i].nodes))
 
@@ -511,20 +513,21 @@ class EnhancedIsolationForest:
 if __name__ == '__main__':
 
     # 1 = breast_cancer, 5 = mock_pay_data, 7 = test_k_modes, 9 = test_ad, 10 = test_ad_2, 11 = mammography_3000_20_plus_3_rigged #13 - Alight NGA test with term emps
-    dataset_num = 13
+    dataset_num = 1
     data_dir = 'C:/Users/russellM/OneDrive - Northgate Information Solutions Limited\Documents/GitLab/ML-lab/data/'
     curr_dataset, df, df_f, id_cols, label_col, thresh, perform_ohe, target_cols_for_pca = load_data(data_dir, dataset_num)
 
-    f = EnhancedIsolationForest(verbose=0)
+    f = EnhancedIsolationForest(verbose=0, num_trees=20)
 
-    f.fit(df_f, num_trees=100, max_samples='auto')  # 200
+    f.fit(df_f)  # 200
 
     #joblib.dump(f, 'data/tst_only.pkl')
     #f = joblib.load('data/tst_only.pkl')
 
     # depths, avg_depths, all_features_used = f_reloaded.decision_function(df_f)
 
-    avg_depths, most_used, last_used = f.decision_function(df_f)
+    #avg_depths, most_used, last_used = f.decision_function(df_f)
+    avg_depths = f.decision_function(df_f)
     df_with_scores = f.add_scores(df, avg_depths)
     df_with_scores = f.determine_important_features(df_f,df_with_scores,3)
 

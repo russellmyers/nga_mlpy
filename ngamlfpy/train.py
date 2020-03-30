@@ -277,7 +277,7 @@ class Trainer:
      |Note: Mostly the subclass AzureTrainer will be used, which includes functionality to log to Azure etc
      """
 
-    trainer_code_version = '0.1c'
+    trainer_code_version = '0.1d'
 
     def __init__(self,ml_service,model_name,hyper_params=None,in_trained_model=None,in_scaler_X=None,in_scaler_Y=None,base_folder=None, model_version=None, clip_training_set=None, clip_test_set=None):
         """
@@ -301,7 +301,7 @@ class Trainer:
         if hyper_params is None:
             self.hyper_params = {'run_num': 1, 'learning_rate_init': 0.001, 'alpha': 1.0,
                             'hidden_layer_sizes': [100], 'num_iters': 500, 'max_iter': 50000,
-                            'batch_size': 200, 'clip_training_set':-1, 'clip_test_set':-1}
+                            'batch_size': 200, 'iso_num_estimators':200, 'iso_max_samples':'auto','iso_max_features':'1.0','clip_training_set':-1, 'clip_test_set':-1}
         else:
             self.hyper_params = hyper_params
 
@@ -357,6 +357,9 @@ class Trainer:
          - hp_reg (Hyperparameter - regularisation alpha, eg 0.0001)
          - hp_hidden_layers(Hyperparameter - neural network hidden layers, eg [100])
          - hp_iters (Hyperparameter - number iterations, eg 1000)
+         - hp_iso_num_estimators ((Hyperparameter - isolation forest num estimators, eg 200
+         - hp_iso_max_samples (Hyperparameter - isolation forest max samples, eg '0.9')
+         - hp_iso_max_features (Hyperparameter - isolation  forest max features, eg '1.0')
          - clip_training_set (Optional. Number of training examples to restrict to - uses all available via train/test split if not supplied)
          - clip_test_set (Optional. Number of test examples to restrict to - uses all available via train/test split if not supplied)
          - local_run_log_to_azure (default 'N'. Specifies whether to still log to Azure if it is a local run
@@ -377,8 +380,25 @@ class Trainer:
         clip_training_set = args.clip_training_set
         clip_test_set = args.clip_test_set
 
+
+        if '.' in args.hp_iso_max_samples:
+            iso_max_samples = float(args.hp_iso_max_samples) # fraction of samples to use
+        else:
+            try:
+                iso_max_samples = int(args.hp_iso_max_samples) # number of samples to use
+            except:
+                iso_max_samples = args.hp_iso_max_samples # string, eg 'auto'
+
+        if '.' in args.hp_iso_max_features:
+            iso_max_features = float(args.hp_iso_max_features) # fraction of features to use
+        else:
+            iso_max_features = int(args.hp_iso_max_features) # number of features  to use
+
+
         hyper_params = {'run_num': 1, 'learning_rate_init': args.hp_lr_init, 'alpha': args.hp_reg,
                         'hidden_layer_sizes': args.hp_hidden_layers, 'num_iters': args.hp_iters, 'max_iter': 50000,
+                        'iso_num_estimators' : args.hp_iso_num_estimators, 'iso_max_samples': iso_max_samples,
+                        'iso_max_features': iso_max_features,
                         'batch_size': 200, 'clip_training_set':args.clip_training_set, 'clip_test_set': args.clip_test_set}
 
         return Trainer(ml_service,model,hyper_params,model_version=model_vers,clip_training_set=clip_training_set, clip_test_set=clip_test_set)
@@ -759,14 +779,21 @@ class Trainer:
 
     def _create_isolation_forest(self):
 
-        trained_model = IsolationForest(n_estimators=200, max_samples=0.9,
+        iso_num_estimators = self.hyper_params['iso_num_estimators']
+        iso_max_samples = self.hyper_params['iso_max_samples']
+        iso_max_features = self.hyper_params['iso_max_feaures']
+
+        trained_model = IsolationForest(n_estimators=iso_num_estimators, max_samples=iso_max_samples, max_features = iso_max_features,
                                    contamination=0.01)  # , random_state=rng) #estimators should be 200
 
         return trained_model
 
     def _create_enhanced_isolation_forest(self):
 
-        trained_model = EnhancedIsolationForest(verbose=0)
+        iso_num_trees = self.hyper_params['iso_num_estimators']
+        iso_max_samples = self.hyper_params['iso_max_samples']
+
+        trained_model = EnhancedIsolationForest(num_trees = iso_num_trees, max_samples = iso_max_samples)
 
         return trained_model
 
@@ -972,8 +999,24 @@ class AzureTrainer(Trainer):
         clip_training_set = args.clip_training_set
         clip_test_set = args.clip_test_set
 
+        if '.' in args.hp_iso_max_samples:
+            iso_max_samples = float(args.hp_iso_max_samples)  # fraction of samples to use
+        else:
+            try:
+                iso_max_samples = int(args.hp_iso_max_samples)  # number of samples to use
+            except:
+                iso_max_samples = args.hp_iso_max_samples  # string, eg 'auto'
+
+        if '.' in args.hp_iso_max_features:
+            iso_max_features = float(args.hp_iso_max_features)  # fraction of features to use
+        else:
+            iso_max_features = int(args.hp_iso_max_features)  # number of features  to use
+
+
         hyper_params = {'run_num': 1, 'learning_rate_init': args.hp_lr_init, 'alpha': args.hp_reg,
                         'hidden_layer_sizes': args.hp_hidden_layers, 'num_iters': args.hp_iters, 'max_iter': 50000,
+                        'iso_num_estimators': args.hp_iso_num_estimators, 'iso_max_samples': iso_max_samples,
+                        'iso_max_features': iso_max_features,
                         'batch_size': 200, 'clip_training_set':args.clip_training_set, 'clip_test_set': args.clip_test_set}
 
         local_run_log_to_azure = args.local_run_log_to_azure
@@ -1004,6 +1047,9 @@ class AzureTrainer(Trainer):
             self.run.log('batch size', int(self.hyper_params['batch_size']))
             self.run.log('learning rate', np.float(self.hyper_params['learning_rate_init']))
             self.run.log('num hidden layers', int(len(self.hyper_params['hidden_layer_sizes'])))
+            self.run.log('iso num estimators', int(self.hyper_params['iso_num_estimators']))
+            self.run.log('iso max samples', str(self.hyper_params['iso_max_samples']))
+            self.run.log('iso max features',str(self.hyper_params['iso_max_features']))
             self.run.log('num train examples',int(self.df_X_train.shape[0]))
             trn_cost_only = self.df_costs['Trn']
             tst_cost_only = self.df_costs['Tst']
@@ -1078,6 +1124,9 @@ if __name__ == '__main__':
     trainer.hyper_params['hidden_layer_sizes'] =  [20,20] #400,400,400,400]
     trainer.hyper_params['learning_rate_init'] = 0.01 #0.01
     trainer.hyper_params['alpha'] =   1e-05 # 1000.0 # 1e-05 #100000.0 #1e-05 #1000.0 #1e-05
+
+    trainer.hyper_params['iso_num_estimators'] = 100
+    trainer.hyper_params['iso_max_samples'] = 'auto'
 
     #trainer.hyper_params['clip_training_set'] = 100
     # trainer.clip_training_set()
