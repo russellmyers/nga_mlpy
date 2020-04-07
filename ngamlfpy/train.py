@@ -849,14 +849,14 @@ class Trainer:
         plt.ylabel('abs % difference')
         plt.xlabel('Employee')
         plt.bar(x_vals, data_abs)
-        self.finalise_graph(plt, "Train set  abs % differences (actual vs predicted Tax) per employee")
+        self.finalise_graph(plt, "Train set  abs perc differences (actual vs predicted Tax) per employee")
 
 
         data = df_with_pred['perc_diff']
         data_noinf = data[~data.isin([np.nan, np.inf, -np.inf])]
         data_clipped = data_noinf.apply(lambda x: min(50, x))
         data_clipped = data_clipped.apply(lambda x: max(-50, x))
-        plt.title('Train set  % differences (actual vs predicted Tax) per employee Histogram')
+        plt.title('Train set  perc differences (actual vs predicted Tax) per employee Histogram')
         # plt.ylim(top=30)
         # plt.ylabel('% difference')
         # plt.xlabel('Employee')

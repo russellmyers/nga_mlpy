@@ -3,6 +3,8 @@ outputs/
 azure_upload_scripts/
 myenv.yml
 downloaded_models/
+test_only*
+testflight.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

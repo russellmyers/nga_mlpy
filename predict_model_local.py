@@ -74,10 +74,10 @@ raw_data = {}
 raw_data['data'] = j_predict
 
 if args.output_predict_json_as_file:
-    predict_json_file_name =  args.input_file_name.split('.')[0] + '.json'
-    full_path_json = os.path.join(finder.get_output_folder(),predict_json_file_name)
-    print('Writing json predict in file: ', full_path_json)
-    with open(full_path_json, 'w') as outfile:
+    predict_json_input_file_name =  args.input_file_name.split('.')[0] + '.json'
+    full_path_json_in = os.path.join(finder.get_output_folder(),predict_json_input_file_name)
+    print('Writing json predict in file: ', full_path_json_in)
+    with open(full_path_json_in, 'w') as outfile:
         json.dump(raw_data, outfile, indent=4)
 
 res = run(json.dumps(raw_data))
@@ -87,4 +87,19 @@ res_str = json.dumps(res)
 print('res..' + res_str[:200])
 print('res info: ',res['info'])
 print('res pred 1: ',res['Predictions'][0])
+
+predict_json_output_file_name = predict_json_input_file_name.split('.')[0]
+file_name_parts = predict_json_output_file_name.split('_')
+if file_name_parts[-1] == 'input':
+    file_name_parts[-1] = 'predictions'
+else:
+    file_name_parts.append('predictions')
+predict_json_output_file_name = '_'.join(file_name_parts)  + '.json'
+full_path_json_out = os.path.join(finder.get_output_folder(),predict_json_output_file_name)
+print('writing prediction out: ',predict_json_output_file_name)
+with open(full_path_json_out, 'w') as outfile:
+    json.dump(res, outfile, indent=4)
+
+
+
 
