@@ -8,11 +8,11 @@ from ngamlfpy.pipeline import FileRouter
 import argparse
 import os
 
-print("In pipeline_step_route_data.py.....")
+print("In pipeline_step_route_data.py....")
 
 parser = argparse.ArgumentParser("pipeline_step_route_data")
 
-parser.add_argument("--input_data", type=str,default='./data', help="input data directory")
+parser.add_argument("--input_data", type=str,default='./data', help="input data base directory")
 #parser.add_argument("--output_routed", type=str, help="output_routed directory")  eg  data/TWV/input
 #parser.add_argument("--pipeline_parameter", type=str, help="pipeline parameter test")
 parser.add_argument("--ml_service",type=str,help="Machine learning service code, eg TWV")

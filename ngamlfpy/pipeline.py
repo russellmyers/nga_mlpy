@@ -51,6 +51,8 @@ class FileFinder():
 
     MLFOLDER_BASE_FOLDER = './data'
 
+    MLFOLDER_HOLDING = '.'
+
     MLFOLDER_INPUT = 'input'
     MLFOLDER_INPUT_SUFFIX = '_input.csv'
 
@@ -61,10 +63,11 @@ class FileFinder():
     MLFOLDER_PROCESSED = 'processed'
 
 
-    def __init__(self, ml_service, use_model_name_in=False, use_model_name_out=False, model_name=None, model_version = None, base_folder=None, relative_input_folder = MLFOLDER_INPUT, relative_output_folder=MLFOLDER_INPUT, relative_processed_folder=MLFOLDER_PROCESSED, output_file_suffix=''):
+    def __init__(self, ml_service, use_ml_service_in=True, use_model_name_in=False, use_model_name_out=False, model_name=None, model_version = None, base_folder=None, relative_input_folder = MLFOLDER_HOLDING, relative_output_folder=MLFOLDER_INPUT, relative_processed_folder=MLFOLDER_PROCESSED, output_file_suffix=''):
 
         """
         :param ml_service:  ML Service, eg PAD or TWV
+        :param use_ml_service_in: If supplied, appends ml service to input path
         :param use_model_name_in: If supplied, appends model name to input path (and version if version supplied)
         :param use_model_name_out: If supplied, appends model name to output path (and version if version supplied)
         :param model_name: Model name, eg T001
@@ -85,6 +88,7 @@ class FileFinder():
         self.output_file_suffix = output_file_suffix
         self.use_model_name_in = use_model_name_in
         self.use_model_name_out = use_model_name_out
+        self.use_ml_service_in = use_ml_service_in
 
         if base_folder is None:
             self.base_folder = FileFinder.MLFOLDER_BASE_FOLDER
@@ -113,10 +117,13 @@ class FileFinder():
                 return os.path.join(os.path.join(ml_service_plus_path, self.model_name),self.model_version)
 
     def get_input_folder(self):
-        if self.use_model_name_in:
-           return self.__add_model_to_path(self.relative_input_folder)
+        if self.use_ml_service_in:
+            if self.use_model_name_in:
+               return self.__add_model_to_path(self.relative_input_folder)
+            else:
+               return  self.__add_ml_service_to_path(self.relative_input_folder)
         else:
-           return  self.__add_ml_service_to_path(self.relative_input_folder)
+            return self.base_folder
 
     def get_processed_folder(self):
         return self.__add_ml_service_to_path(self.relative_processed_folder)
@@ -144,7 +151,9 @@ class FileFinder():
             if os.path.isdir(os.path.join(self.get_input_folder(), file_name)):
                 pass
             else:
-                files_only.append(file_name)
+                parsed_file_name = self.parse_input_file_name(file_name)
+                if parsed_file_name['ml_service'] == self.ml_service:
+                    files_only.append(file_name)
 
 
         return files_only
@@ -169,10 +178,27 @@ class FileFinder():
                 - Source System
             - Other free format attributes can be appended after first 8 (also delimited by '_')
         """
+
+        fname_parsed = {}
+
+        fname_component_titles = ['ml_service', 'model_name', 'model_vers', 'payroll_service', 'gcc', 'lcc', 'group',
+                                  'system']
+
         if include_remainder:
-            return file_name.split('_')[:8] + ['_'.join(file_name.split('_')[8:])]
+            fname_component_titles.append('rest')
+            fname_components = file_name.split('_')[:8] + ['_'.join(file_name.split('_')[8:])]
         else:
-           return file_name.split('_')[:8]
+            fname_components = file_name.split('_')[:8]
+
+        for i, component_title in  enumerate(fname_component_titles):
+            fname_parsed[component_title] = fname_components[i]
+
+        return fname_parsed
+        #
+        # if include_remainder:
+        #     return file_name.split('_')[:8] + ['_'.join(file_name.split('_')[8:])]
+        # else:
+        #    return file_name.split('_')[:8]
 
     def assemble_output_file_name_prefix_from_selection(self,selection):
         '''
@@ -272,7 +298,7 @@ class PipelineProcess:
 
     '''
 
-    pipeline_code_version = '0.1g' # Used within Azure ML Service to determine which code version used
+    pipeline_code_version = '0.1i' # Used within Azure ML Service to determine which code version used
 
     def __init__(self, ml_service,base_folder=None,predict=False):
         self.ml_service = ml_service
@@ -1109,9 +1135,9 @@ class PipelineTransformer(PipelineProcess):
         df_cons = None
 
         for file_name in all_files:
-            ml_service, model_name, model_vers, payroll_service, gcc, lcc, group, rest = self.finder.parse_input_file_name(
-                file_name)
-            if model_vers == self.model_version_to_transform:
+            file_name_parsed = self.finder.parse_input_file_name(file_name)
+            #ml_service, model_name, model_vers, payroll_service, gcc, lcc, group, rest = self.finder.parse_input_file_name(file_name)
+            if file_name_parsed['model_vers'] == self.model_version_to_transform:
 
                 df,full_name = self.read_input_file(file_name)
                 df_formatted = self.format_data(df)
@@ -1440,8 +1466,8 @@ class FileRouter(PipelineProcess):
 
         super(FileRouter, self).__init__(ml_service,base_folder=base_folder)
 
-        self.finder = FileFinder(ml_service, use_model_name_in=False, use_model_name_out=True, model_name=None,
-                                 base_folder=base_folder, relative_input_folder=FileFinder.MLFOLDER_INPUT,
+        self.finder = FileFinder(ml_service, use_ml_service_in=False, use_model_name_in=False, use_model_name_out=True, model_name=None,
+                                 base_folder=base_folder, relative_input_folder=FileFinder.MLFOLDER_HOLDING,
                                  relative_output_folder=FileFinder.MLFOLDER_INPUT,
                                  output_file_suffix=FileFinder.MLFOLDER_INPUT_SUFFIX)
 
@@ -1450,15 +1476,21 @@ class FileRouter(PipelineProcess):
     def route_files(self):
         all_pending_files = self.finder.get_input_file_names()
         print('files to route: ',all_pending_files)
+
+        all_routed_files = []
+        num_routed = 0
+        num_bypassed = 0
+
         for file_name in all_pending_files:
 
 #            system,client,gcc,lcc,payroll_area,period,_ = self.finder.parse_input_file_name(file_name)
-            ml_service,model_name,model_vers,payroll_service,gcc,lcc,group,rest = self.finder.parse_input_file_name(file_name)
-            system = rest.split('_')[0]
+            #ml_service,model_name,model_vers,payroll_service,gcc,lcc,group,rest = self.finder.parse_input_file_name(file_name)
+            #system = rest.split('_')[0]
+            file_name_parsed = self.finder.parse_input_file_name(file_name)
 
-            model_conf = MLModelConfig.get_model_config_from_web_service_for_cust(self.ml_service,system,gcc,lcc,group=group)#payroll_area = payroll_area)
+            model_conf = MLModelConfig.get_model_config_from_web_service_for_cust(self.ml_service,file_name_parsed['system'],file_name_parsed['gcc'],file_name_parsed['lcc'],group=file_name_parsed['group'])#payroll_area = payroll_area)
             self.finder.model_name = model_conf.get_model_name()
-            self.finder.model_version = model_vers
+            self.finder.model_version = file_name_parsed['model_vers']
             output_folder = self.finder.get_output_folder()
             if os.path.exists(output_folder):
                 pass
@@ -1470,11 +1502,15 @@ class FileRouter(PipelineProcess):
             out_full_path = os.path.join(self.finder.get_output_folder(),file_name)
             if os.path.exists(out_full_path):
                 print('File already exists: ',out_full_path,' - bypassing')
+                num_bypassed +=1
             else:
                 shutil.move(full_path, self.finder.get_output_folder())
+                all_routed_files.append(file_name)
+                num_routed +=1
 
-        self.run.log('numfilesrouted', len(all_pending_files))
-        return all_pending_files
+        self.run.log('numfilesrouted', num_routed)
+        self.run.log('numfilesbypassed', num_bypassed)
+        return all_routed_files
 
 class FilePoster(PipelineProcess):
     ''' Experimental only - currently not in use'''
