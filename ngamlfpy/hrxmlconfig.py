@@ -16,8 +16,9 @@ class MLModelConfig:
 
     '''
 
-    #TODO - replace with HRX ML Config API Web Service URL
-    URL_PREFIX = 'http://pseudotest.a2hosted.com/etp/'
+    #TODO - allow switching to dev or prod mlconfig api url
+    #URL_PREFIX = 'http://pseudotest.a2hosted.com/etp/'
+    URL_PREFIX = 'https://hrxmlconfig-dev.cloudapp.ngahr.com/'  #DEV
 
     def __init__(self, j_config,selection=None):
         """
@@ -112,7 +113,22 @@ class MLModelConfig:
     #         """)
 
     @staticmethod
-    def call_web_service(endpoint, query_params=None, param=None, url_prefix=URL_PREFIX,headers=None):
+    def get_auth_token_header(url_prefix=URL_PREFIX):
+        auth_endpoint = 'auth/tokens'
+        data = {'clientId': 'bf491e97-47a0-4217-a676-7353ec1256f2',
+                'clientSecret': 'I8hsaTtyQeUhCO3a7VXfYlZh3iplKFbdarCJax4iKfcoveOIXRdz48Vwiax1EhWk', 'customerId': 'ZZZ',
+                'companyId': 'Z99'}
+        j_data, status_code = MLModelConfig.call_web_service(auth_endpoint, command='POST', data=data, url_prefix = url_prefix)
+
+        token_header = None
+        if status_code == 200:
+            bearer = "Bearer " + j_data['token']
+            token_header = {"Authorization": bearer}
+        return j_data, status_code, token_header
+
+
+    @staticmethod
+    def call_web_service(endpoint, query_params=None, param=None, command='GET', data=None, url_prefix=URL_PREFIX,headers=None):
         """General static method to call any of the endpoints within HRXMLConfig API.
 
            :param endpoint: Endpoint to call
@@ -122,6 +138,10 @@ class MLModelConfig:
            :type query_param: str
 
            :param url_prefix: Base url for endpoint. Defaults to location in "URL_PREFIX" constant
+
+           :param command: Defaults to GET
+
+           :param data: Json data (used as body data for POST. Not required for GET)
 
            :param headers: Optional parameter - headers to include headers for gcc and lcc
                             in web service call
@@ -136,13 +156,31 @@ class MLModelConfig:
         else:
             full_url = url_prefix + endpoint + query_params
 
-        resp = requests.get(full_url)
+        if command== 'GET':
+           resp = requests.get(full_url, headers=headers)
+        elif command =='POST':
+           resp = requests.post(full_url, data=data, headers=headers)
         j_data = {}
+
+        auth_token_header = None
+        if resp.status_code == 401: #unauthorised
+            auth_data, auth_response, auth_token_header = MLModelConfig.get_auth_token_header(url_prefix=url_prefix)
+            if auth_response == 200:
+                if command == 'GET':
+                    resp = requests.get(full_url, headers=auth_token_header)
+                elif command == 'POST':
+                    resp = requests.post(full_url, data=data, headers=auth_token_header)
+
+
         if resp.status_code != 200:
             print('Error reading from web service: ' + full_url + ' response status: ' + str(resp))
             return {}, resp.status_code
 
         j_data = json.loads(resp.text)
+        if auth_token_header is None:
+            pass
+        else:
+            j_data['auth_token_header'] = auth_token_header
         print('web service call successful: ',endpoint, query_params)
         return j_data, resp.status_code
 
@@ -159,7 +197,7 @@ class MLModelConfig:
         """
 
         headers = MLModelConfig.build_headers('ZZZ','Z99')
-        endpoint = 'api/customer-models'
+        endpoint = 'api/V2/customer-models'
         query_params = ''
 
         j, status = MLModelConfig.call_web_service(endpoint, query_params=query_params, url_prefix=MLModelConfig.URL_PREFIX,headers=headers)
@@ -167,10 +205,10 @@ class MLModelConfig:
         cust_data = {}
 
         if status == 200:
-            for item in j['Items']:
+            for item in j['items']:
                # if (item['model_name'] == model_name) and (item['ml_service'] == ml_service):
-                if (item['model'] == model_name):
-                    endpoint = 'api/customer-models/' + str(item['id'])
+                if (item['modelCode'] == model_name):
+                    endpoint = 'api/V2/customer-models/' + str(item['id'])
                     j_group, status = MLModelConfig.call_web_service(endpoint, query_params=query_params,
                                                                           url_prefix=MLModelConfig.URL_PREFIX,
                                                                           headers=headers)
@@ -190,7 +228,7 @@ class MLModelConfig:
                                                    payroll_area: object = None,
                                                    client: object = None,
 
-                                                   endpoint: object = 'api/model-info',
+                                                   endpoint: object = 'api/V2/model-info',
                                                    url_prefix: object = URL_PREFIX,
                                                    use_headers: object = False) -> object:
 
@@ -198,7 +236,7 @@ class MLModelConfig:
            Creates MLModelConfig object based on returned json, and returns the created object
         """
 
-        query_params = '?ml_service=' + ml_service + '&system=' + system + '&gcc=' + gcc + '&lcc=' + lcc
+        query_params = '?mlService=' + ml_service + '&system=' + system + '&gcc=' + gcc + '&lcc=' + lcc
         if group is None:
             pass
         else:
@@ -207,7 +245,7 @@ class MLModelConfig:
         if payroll_area is None:
             pass
         else:
-            query_params += '&payroll_area=' + payroll_area
+            query_params += '&payrollArea=' + payroll_area
 
         headers = None
         if use_headers:
@@ -238,11 +276,11 @@ class MLModelConfig:
         """Static method to retrieve variant associated with specified payroll area for an ml service/gcc/lcc
         Returns variant code"""
 
-        j_data,status = MLModelConfig.call_web_service('api/customer-models')
+        j_data,status = MLModelConfig.call_web_service('api/V2/customer-models')
 
         if status == 200:
-           for item in j_data['Items']:
-                  j_group_data, status = MLModelConfig.call_web_service('api/customer-models/' + str(item['id']))
+           for item in j_data['items']:
+                  j_group_data, status = MLModelConfig.call_web_service('api/V2/customer-models/' + str(item['id']))
                   if status == 200:
                       if (j_group_data['customer']['gcc'] == gcc) and (j_group_data['customer']['lcc'] == lcc) and(j_group_data['mlService']['code']==ml_service) :
                           if payroll_area in j_group_data['payrollAreas']:
@@ -260,10 +298,10 @@ class MLModelConfig:
     def get_ml_service_details(ml_service):
         """ Static method to retrieve details for specified ml service from ml-services endpoint"""
 
-        j_data,status = MLModelConfig.call_web_service('api/ml-services')
+        j_data,status = MLModelConfig.call_web_service('api/V2/ml-services')
 
         if status == 200:
-           for item in j_data['Items']:
+           for item in j_data['items']:
                 if (item['code'] == ml_service):
                     return item
            return {}
@@ -287,17 +325,17 @@ class MLModelConfig:
 
     def get_model_name(self):
         """ Returns model name"""
-        return self.j_config['modelCode']
+        return self.j_config['code']
 
     def get_model_version(self):
         """ Returns model version (zfilled to 3 chars)"""
-        return self.j_config['modelVersion'].zfill(3)
+        return str(self.j_config['version']).zfill(3)
 
     def get_all_fields(self):
         """ Returns  list containing all fields  used in model config
          (ie data source fields + selection fields + features + labels)"""
 
-        return self.j_config['datasourceFields'] + self.j_config['selectionFields'] +  self.j_config['features'] + self.j_config['labels']
+        return self.j_config['dataSourceFields'] + self.j_config['selectionFields'] +  self.j_config['features'] + self.j_config['labels']
 
 
     def get_all_field_names(self):
@@ -311,7 +349,7 @@ class MLModelConfig:
 
     def get_metadata(self):
         """ Returns metadata for model config """
-        return {"id":self.j_config["modelCode"], "description":self.j_config["modelDescription"], "country": self.j_config["modelCountry"], "version": self.j_config["modelVersion"]}
+        return {"id":self.j_config["code"], "description":self.j_config["description"], "country": self.j_config["country"], "version": self.j_config["version"]}
 
 
     def get_feature_field_names(self):
@@ -340,7 +378,7 @@ class MLModelConfig:
 
         all_fields = self.get_all_fields()
 
-        field_names = [x['title'] for x in all_fields if x['feature_type'] == feat_type]
+        field_names = [x['title'] for x in all_fields if x['featureType'] == feat_type]
         return field_names
 
     # def get_selection_fields(self, cols):
@@ -371,7 +409,7 @@ class MLModelConfig:
     def get_data_source_field_names(self):
         """ Returns list of field titles for all data source fields """
 
-        field_names = [x['title'] for x in self.j_config['datasourceFields']]
+        field_names = [x['title'] for x in self.j_config['dataSourceFields']]
         return field_names
 
 
@@ -404,7 +442,7 @@ class MLModelConfig:
         all_fields = self.get_all_fields()
 
         for feature in all_fields:
-            if feature['feature_type'] == 'L':
+            if feature['featureType'] == 'L':
                 out = feature['title']
                 return out
 
@@ -495,7 +533,7 @@ class MLModelConfig:
         all_fields = self.get_all_fields()
 
         for feature in all_fields:
-            if feature['feature_type'] == 'C':
+            if feature['featureType'] == 'C':
                 out.append(feature['title'])
 
         return out
@@ -662,8 +700,25 @@ class TestModelConfig(unittest.TestCase):
 
 if __name__ == '__main__':
 
+    auth_endpoint = 'auth/tokens'
+    data = {'clientId': 'bf491e97-47a0-4217-a676-7353ec1256f2',
+            'clientSecret': 'I8hsaTtyQeUhCO3a7VXfYlZh3iplKFbdarCJax4iKfcoveOIXRdz48Vwiax1EhWk', 'customerId': 'ZZZ',
+            'companyId': 'Z99'}
+
+    # response_data = r.json()
+    # bearer = "Bearer " + response_data['token']
+    # header = {"Authorization": bearer}
+
+    j_data, status_code, auth_token_header = MLModelConfig.get_auth_token_header()
+
+
+    j_data, status_code = MLModelConfig.call_web_service('api/V2/systems', query_params=None, param=None) #, headers=auth_token_header)
+
+    ml_model_config_cust = MLModelConfig.get_model_config_from_web_service_for_cust('PAD', 'EDF', 'ZZZ', 'Z99',
+                                                                                    group='MTHLY')
+
     model = 'T001'
-    run_unit_tests = True
+    run_unit_tests = False
 
     if run_unit_tests:
         unittest.main()
