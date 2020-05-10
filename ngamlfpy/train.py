@@ -277,7 +277,7 @@ class Trainer:
      |Note: Mostly the subclass AzureTrainer will be used, which includes functionality to log to Azure etc
      """
 
-    trainer_code_version = '0.1d'
+    trainer_code_version = '0.1e'
 
     def __init__(self,ml_service,model_name,hyper_params=None,in_trained_model=None,in_scaler_X=None,in_scaler_Y=None,base_folder=None, model_version=None, clip_training_set=None, clip_test_set=None):
         """
@@ -678,10 +678,11 @@ class Trainer:
         if label_col_details is None:
             pass
         else:
-            if label_col_details['data_type'] == 'F':
-                df_with_pred[label_col] = df_with_pred[label_col].astype(float)
-            elif label_col_details['data_type'] == 'N':
-                df_with_pred[label_col] = df_with_pred[label_col].astype(int)
+            if label_col in df_with_pred:
+                if label_col_details['dataType'] == 'F':
+                    df_with_pred[label_col] = df_with_pred[label_col].astype(float)
+                elif label_col_details['dataType'] == 'N':
+                    df_with_pred[label_col] = df_with_pred[label_col].astype(int)
 
         if pred_set:
             pass
@@ -689,10 +690,11 @@ class Trainer:
             if self.is_unsupervised():
                 pass
             else:
-                df_with_pred['diff'] = df_with_pred['pred'] - df_with_pred[label_col]
-                df_with_pred['perc_diff'] = df_with_pred['diff'] / df_with_pred[label_col] * 100.0
-                df_with_pred = df_with_pred.round({'perc_diff': 2})
-                df_with_pred['cost'] = df_with_pred['diff'] * df_with_pred['diff']
+                if label_col in df_with_pred:
+                    df_with_pred['diff'] = df_with_pred['pred'] - df_with_pred[label_col]
+                    df_with_pred['perc_diff'] = df_with_pred['diff'] / df_with_pred[label_col] * 100.0
+                    df_with_pred = df_with_pred.round({'perc_diff': 2})
+                    df_with_pred['cost'] = df_with_pred['diff'] * df_with_pred['diff']
 
         return df_with_pred
 

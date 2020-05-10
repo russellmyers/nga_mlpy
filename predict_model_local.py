@@ -40,19 +40,23 @@ full_path_in =  finder.get_full_input_file_name(args.input_file_name)  #os.path.
 
 #full_path_in = os.path.join(folder,args.input_file_name)
 
+if full_path_in.split('.')[-1] == 'json':
+    with open(full_path_in) as json_file:
+        j_predict = json.load(json_file)
+else:
 
-df = pd.read_csv(full_path_in)
-#df = pd.read_csv('data/PAD/input/' + model_code + '/PAD_EUH_AKN_A05_ALL_EP5_984_N0_201908_input.csv')
-#df = pd.read_csv('data/PAD/input/M005/001/PAD_M005_001_EUH_ZZZ_Z10_MTHLY_EDF_310_ZZ_201905_input.csv')
-print(df.head())
+    df = pd.read_csv(full_path_in)
+    #df = pd.read_csv('data/PAD/input/' + model_code + '/PAD_EUH_AKN_A05_ALL_EP5_984_N0_201908_input.csv')
+    #df = pd.read_csv('data/PAD/input/M005/001/PAD_M005_001_EUH_ZZZ_Z10_MTHLY_EDF_310_ZZ_201905_input.csv')
+    print(df.head())
 
-file_name_parsed = finder.parse_input_file_name(args.input_file_name,include_remainder=True)
-#_,_,_,payroll_service, gcc, lcc, group, system, rest = finder.parse_input_file_name(args.input_file_name,include_remainder=True)
-client, abkrs, period, other = file_name_parsed['rest'].split('_')
-ml_config = MLModelConfig.get_model_config_from_web_service_for_cust(args.ml_service, system=file_name_parsed['system'],gcc=file_name_parsed['gcc'],lcc=file_name_parsed['lcc'],payroll_area=abkrs)
+    file_name_parsed = finder.parse_input_file_name(args.input_file_name,include_remainder=True)
+    #_,_,_,payroll_service, gcc, lcc, group, system, rest = finder.parse_input_file_name(args.input_file_name,include_remainder=True)
+    client, abkrs, period, other = file_name_parsed['rest'].split('_')
+    ml_config = MLModelConfig.get_model_config_from_web_service_for_cust(args.ml_service, system=file_name_parsed['system'],gcc=file_name_parsed['gcc'],lcc=file_name_parsed['lcc'],payroll_area=abkrs)
 
-j_predict = pulled_df_to_json(df, ml_config, period, use_first_data_line_as_selection=True, use_value_title_format=True,
-                              values_only=False, clip_emps=args.clip_emps)
+    j_predict = pulled_df_to_json(df, ml_config, period, use_first_data_line_as_selection=True, use_value_title_format=True,
+                                  values_only=False, clip_emps=args.clip_emps)
 
 #outJson = input_json_file_name
 #print('Writing out json file: ', outJson)

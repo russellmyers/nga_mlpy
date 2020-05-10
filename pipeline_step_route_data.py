@@ -8,7 +8,7 @@ from ngamlfpy.pipeline import FileRouter
 import argparse
 import os
 
-print("In pipeline_step_route_data.py....")
+print("In pipeline_step_route_data.py...")
 
 parser = argparse.ArgumentParser("pipeline_step_route_data")
 

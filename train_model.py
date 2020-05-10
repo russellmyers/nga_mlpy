@@ -49,6 +49,6 @@ trainer.write_model()
 
 trainer.plot_graphs()
 
-trainer.run.complete()
+#trainer.run.complete()
 print('Training is complete!')
 
